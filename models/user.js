@@ -21,6 +21,13 @@ var UserSchema = mongoose.Schema({
     email        : String,
     name         : String
   },
+  google:{
+	id           : String,
+    token        : String,
+    email        : String,
+	name         : String,
+	image        : String
+  }
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);
@@ -35,7 +42,7 @@ module.exports.createUser = function(newUser, callback){
 }
 
 module.exports.getUserByUsername = function(username, callback){
-	var query = {username: username};
+	var query = {name: username};
 	User.findOne(query, callback);
 }
 

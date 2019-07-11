@@ -25,14 +25,14 @@ router.post('/register',(req, res)=>{
 
 // Endpoint to login
 router.post('/login',
-  passport.authenticate('local',{ failureRedirect: '/login' }),
+  passport.authenticate('local',{failureRedirect: '/sorry'}),
   (req, res) =>{
     res.status(200).json({msg:'login success',user:req.user});
   }
 );
 
 // Endpoint to get current user
-router.get('/user',(req, res)=>{
+router.get('/user',passport.authenticate('local',{failureRedirect: '/login'}),(req, res)=>{
 	res.status(200).json({msg:'current User',user:req.user});
 })
 
@@ -42,6 +42,18 @@ router.get('/logout',(req, res)=>{
 	req.logout();
 	res.json({msg:'logout'})
 });
+
+// login with google
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile','email'] }));
+
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.json({user:req.user})
+  });
+
 
 // login with facebook
 router.get('/auth/facebook',passport.authenticate('facebook')); //eg { scope: ['user_friends', 'manage_pages'] }

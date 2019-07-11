@@ -38,7 +38,8 @@ require('./config/passport-setup');
 
 //routes
 app.get('/', (req, res) => res.send('Hello World!'))
-
+app.get('/success', (req, res) => res.send('Success full '))
+app.get('/login', (req, res) => res.send('Login please!'))
 // auth routes
 app.use('/api',authRoutes);
 
