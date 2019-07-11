@@ -1,5 +1,4 @@
 const User=require('../models/user');
-const mongoose = require('mongoose');
 const passport = require('passport');
 const key=require('./config/key');
 
@@ -39,8 +38,8 @@ passport.use(new LocalStrategy(
 
 const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
-    clientID: "145658462755484",
-    clientSecret: "ed6555b4e3c8b42764659a2b9c861825",
+    clientID: key.facebook.clientID,
+    clientSecret: key.facebook.clientSecret ,
     callbackURL: "http://localhost:5000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {

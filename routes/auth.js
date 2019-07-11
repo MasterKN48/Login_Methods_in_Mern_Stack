@@ -25,7 +25,7 @@ router.post('/register',(req, res)=>{
 
 // Endpoint to login
 router.post('/login',
-  passport.authenticate('local'),
+  passport.authenticate('local',{ failureRedirect: '/login' }),
   (req, res) =>{
     res.status(200).json({msg:'login success',user:req.user});
   }

@@ -8,7 +8,6 @@ const Post = require('./models/post')
 const morgan=require('morgan');
 const key=require('./config/key');
 const authRoutes=require('./routes/auth');
-
 // app
 const app = express();
 // Conenct to DB
@@ -36,7 +35,7 @@ app.use(session({
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
-
+require('./config/passport-setup')(passport);
 
 //routes
 app.get('/', (req, res) => res.send('Hello World!'))
