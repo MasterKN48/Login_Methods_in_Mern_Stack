@@ -1,6 +1,6 @@
 const User=require('../models/user');
 const passport = require('passport');
-const key=require('./config/key');
+const key=require('./key');
 
 // serialize && desearlize 
 passport.serializeUser((user, done) =>{
@@ -67,3 +67,5 @@ passport.use(new FacebookStrategy({
     });
   }
 ));
+
+module.exports = passport;

@@ -19,7 +19,7 @@ router.post('/register',(req, res)=>{
   		res.send(user).end()
   	});
   } else{
-    res.status(500).send("{erros: \"Passwords don't match\"}").end()
+    res.status(500).send("{errors: \"Passwords don't match\"}").end()
   }
 });
 

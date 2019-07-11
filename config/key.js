@@ -10,7 +10,7 @@ module.exports = {
         cookieKey: 'f_ckU#213'
     },
     facebook:{
-        clientID:'',
-        clientSecret:'',
+        clientID:'dfdf',
+        clientSecret:'dsff',
     }
 };
