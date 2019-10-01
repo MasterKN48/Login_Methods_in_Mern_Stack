@@ -1,4 +1,4 @@
-##  MERN Stack Login Implementations (Hacktoberfest 2019)
+##  MERN Stack Login Methods (Hacktoberfest 2019)
 ---------------
 #### I want to create a project (using MERN Stack) which has most of the famous login authentication system.
 #### I had created passport js implementaion of jwt,google,facebook.
