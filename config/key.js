@@ -12,5 +12,9 @@ module.exports = {
     facebook:{
         clientID:'',
         clientSecret:'',
+    },
+    twitter:{
+        clientID: '',
+        clientSecret: ''
     }
 };

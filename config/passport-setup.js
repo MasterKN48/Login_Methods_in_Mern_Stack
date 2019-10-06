@@ -108,4 +108,38 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+const TwitterStrategy = require('passport-twitter').Strategy;
+passport.use(new TwitterStrategy({
+  consumerKey: key.twitter.clientID,
+  consumerSecret: key.twitter.clientSecret,
+  callbackURL: "http://localhost:5000/auth/twitter/callback"
+},
+function(accessToken, tokenSecret, profile, done) {
+  console.log(profile)
+  User.findOne({ twitterId: profile.id }, function (err, user) {
+    if (err) return done(err);
+      if (user) return done(null, user);
+      else {
+        // if there is no user found with that twitter id, create them
+        var newUser = new User();
+
+        // set all of the twitter information in our user model
+        newUser.twitter.id = profile.id;
+        newUser.twitter.token = accessToken;
+        newUser.twitter.name = profile.displayName;
+        newUser.twitter.image = profile.photos[0].value;
+        if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
+          newUser.twitter.email = profile.emails[0].value;
+
+        // save our user to the database
+        newUser.save()
+        .then( user => {
+          return done(null, user);
+        })
+        .catch(err => console.log(err));
+      }
+  });
+}
+));
+
 module.exports = passport;

@@ -66,5 +66,15 @@ router.get('/auth/facebook/callback',
   }
 );
 
+//login with twitter
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+router.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/login'}),
+  function(req, res){
+    // Successful authentication, redirect home.
+    res.status(200).json({msg:'success',user:req.user});
+  }
+);
 
 module.exports=router;
