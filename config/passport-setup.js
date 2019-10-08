@@ -2,7 +2,7 @@ const User=require('../models/user');
 const passport = require('passport');
 const key=require('./key');
 
-// serialize && desearlize 
+// serialize & desearlize 
 passport.serializeUser((user, done) =>{
     done(null, user.id);
   });
