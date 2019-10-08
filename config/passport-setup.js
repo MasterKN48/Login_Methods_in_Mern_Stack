@@ -41,6 +41,7 @@ passport.use(new LocalStrategy(
   }
 ));
 
+//Strategy for Facebook; Using OAuth to get ID,key and URL
 const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
     clientID: key.facebook.clientID,
@@ -63,7 +64,7 @@ passport.use(new FacebookStrategy({
         if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
           newUser.facebook.email = profile.emails[0].value;
 
-        // save our user to the database
+        // save new user's information into the database
         newUser.save(function(err) {
             if (err) throw err;
             return done(null, newUser);
@@ -73,6 +74,7 @@ passport.use(new FacebookStrategy({
   }
 ));
 
+//Strategy for Google; Using OAuth to get ID,key and URL
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy({
@@ -86,10 +88,10 @@ passport.use(new GoogleStrategy({
       if (err) return done(err);
       if (user) return done(null, user);
       else {
-        // if there is no user found with that facebook id, create them
+        // if there is no user found with that google id, create them
         var newUser = new User();
 
-        // set all of the facebook information in our user model
+        // set all of the google information in our user model
         newUser.google.id = profile.id;
         newUser.google.token = accessToken;
         newUser.google.name  = profile.displayName;
@@ -97,7 +99,7 @@ passport.use(new GoogleStrategy({
         if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
           newUser.google.email = profile.emails[0].value;
 
-        // save our user to the database
+        // save new user's information into the database
         newUser.save()
         .then( user => {
           return done(null, user);
@@ -108,6 +110,7 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+//Strategy for Twitter; Using OAuth to get ID,key and URL
 const TwitterStrategy = require('passport-twitter').Strategy;
 passport.use(new TwitterStrategy({
   consumerKey: key.twitter.clientID,
@@ -131,7 +134,7 @@ function(accessToken, tokenSecret, profile, done) {
         if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
           newUser.twitter.email = profile.emails[0].value;
 
-        // save our user to the database
+        // save new user's information into the database
         newUser.save()
         .then( user => {
           return done(null, user);
