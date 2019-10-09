@@ -1,3 +1,4 @@
+//module loadinga ns const assigning
 const express  = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -20,7 +21,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended:true}));
 
 // Express Session
-let expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000); // 1 days
+let expiryDate = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000); //Session automatically expires after 1 day
 app.use(session({
     secret: key.session.cookieKey,
     saveUninitialized: true,
