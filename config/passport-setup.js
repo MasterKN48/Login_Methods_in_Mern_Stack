@@ -144,5 +144,44 @@ function(accessToken, tokenSecret, profile, done) {
   });
 }
 ));
+//StrategyforReddit;UsingOAuthtogetID,keandURL
+	var RedditStrategy = require('passport-reddit-oauth20').Strategy;
+	
+
+	passport.use(new RedditStrategy({
+	    clientID: key.reddit.clientID,
+	    clientSecret: key.reddit.clientSecret,
+	    callbackURL: "http://localhost:5000/api/auth/reddit/callback"
+	  },
+	  function(accessToken, refreshToken, profile, done) {
+	    console.log(profile)
+	    User.findOne({ 'reddit.id': profile.id }, function(err, user) {
+	      if (err) return done(err);
+	      if (user) return done(null, user);
+	      else {
+	        // if there is no user found with that reddit id, create them
+	        var newUser = new User();
+	
+
+	        // set all of the reddit information in our user model
+	        newUser.reddit.id = profile.id;
+	        newUser.reddit.token = accessToken;
+	        newUser.reddit.name  = profile.displayName;
+	        newUser.reddit.image=profile.photos[0].value;
+	        if (typeof profile.emails != 'undefined' && profile.emails.length > 0)
+	          newUser.reddit.email = profile.emails[0].value;
+	
+
+	        // save new user's information into the database
+	        newUser.save()
+	        .then( user => {
+	          return done(null, user);
+	        })
+	        .catch(err => console.log(err));
+	      }
+	    });
+	  }
+	));
+
 
 module.exports = passport;
