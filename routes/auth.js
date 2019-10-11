@@ -77,4 +77,17 @@ router.get('/auth/twitter/callback',
   }
 );
 
+//login with reddit
+router.get('/auth/reddit', passport.authenticate('reddit'));
+	
+
+	router.get('/auth/reddit/callback',
+	  passport.authenticate('reddit', { failureRedirect: '/login'}),
+	  function(req, res){
+	    // Successful authentication, redirect home.
+	    res.status(200).json({msg:'success',user:req.user});
+	  }
+	);
+
+
 module.exports=router;
