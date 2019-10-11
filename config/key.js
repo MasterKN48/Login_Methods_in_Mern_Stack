@@ -16,5 +16,9 @@ module.exports = {
     twitter:{
         clientID: '',
         clientSecret: ''
+    },
+    reddit:{
+        clientID: '',
+        clientSecret:'',
     }
 };
