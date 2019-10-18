@@ -89,5 +89,14 @@ router.get('/auth/reddit', passport.authenticate('reddit'));
 	  }
 	);
 
+router.get('/auth/github', passport.authenticate('github'));
+
+router.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login'}),
+  function(req, res){
+    // Successful authentication, redirect home.
+    res.status(200).json({msg:'success',user:req.user});
+  }
+);
 
 module.exports=router;
