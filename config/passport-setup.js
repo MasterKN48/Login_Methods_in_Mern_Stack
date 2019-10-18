@@ -195,10 +195,10 @@ function(accessToken, tokenSecret, profile, done) {
     if (err) return done(err);
       if (user) return done(null, user);
       else {
-        // if there is no user found with that twitter id, create them
+        // if there is no user found with that github id, create them
         var newUser = new User();
 
-        // set all of the twitter information in our user model
+        // set all of the github information in our user model
         newUser.github.id = profile.id;
         newUser.github.token = accessToken;
         newUser.github.name = profile.displayName;
