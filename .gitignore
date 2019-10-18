@@ -3,3 +3,6 @@ node_modules
 package-lock.json
 config
 key.js
+
+yarn.lock
+client/yarn.lock
