@@ -6,3 +6,4 @@ key.js
 
 yarn.lock
 client/yarn.lock
+.env
