@@ -20,5 +20,9 @@ module.exports = {
     reddit:{
         clientID: '',
         clientSecret:'',
+    },
+    github:{
+        clientID: '',
+        clientSecret: '',
     }
 };
