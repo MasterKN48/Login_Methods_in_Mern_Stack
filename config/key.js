@@ -24,5 +24,8 @@ module.exports = {
     github:{
         clientID: '',
         clientSecret: '',
+    },
+    linkedIn: {
+        accessToken: 'YOUR_ACCESS_TOKEN'
     }
 };
