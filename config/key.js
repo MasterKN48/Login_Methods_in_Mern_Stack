@@ -26,6 +26,7 @@ module.exports = {
         clientSecret: '',
     },
     linkedIn: {
-        accessToken: 'YOUR_ACCESS_TOKEN'
+        clientID: '',
+        clientSecret: '',
     }
 };
