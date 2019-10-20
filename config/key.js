@@ -28,5 +28,9 @@ module.exports = {
     linkedIn: {
         clientID: '',
         clientSecret: '',
+    },
+    instagram: {
+        clientID: "",
+        clientSecret: ""
     }
 };
