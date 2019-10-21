@@ -29,4 +29,8 @@ module.exports = {
     clientID: '',
     clientSecret: '',
   },
+  instagram: {
+    clientID: '',
+    clientSecret: ''
+  }
 };

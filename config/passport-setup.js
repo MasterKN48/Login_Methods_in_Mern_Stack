@@ -221,6 +221,50 @@ passport.use(new GitHubStrategy({
   }
 ));
 
+//strategy for instagram login method
+var InstagramStrategy = require("passport-instagram").Strategy;
+passport.use(
+  new InstagramStrategy({
+      clientID: key.instagram.clientID,
+      clientSecret: key.instagram.clientSecret,
+      callbackURL: "http://localhost:5000/api/auth/instagram/callback"
+    },
+    function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
+      User.findOne({
+        instagramId: profile.id
+      }, function (err, user) {
+        if (err) return done(err);
+        if (user) return done(null, user);
+        else {
+          //if there is no user find with that instagram id, create new user
+          var newUser = new User();
+
+          //set all of the instagram information in our user model
+          newUser.instagram.id = profile.id;
+          newUser.instagram.token = accessToken;
+          newUser.instagram.name = profile.displayName;
+          newUser.instagram.image = profile.photos[0].value;
+          if (
+            typeof profile.emails != "undefined" &&
+            profile.emails.length > 0
+          ) {
+            newUser.instagram.email = profile.emails[0].value;
+
+            // save the new user's information into the database
+            newUser
+              .save()
+              .then(user => {
+                return done(null, user);
+              })
+              .catch(err => console.log(err));
+          }
+        }
+      });
+    }
+  )
+);
+
 //strategy for LinkedIn login method
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
 passport.use(new LinkedInStrategy({
